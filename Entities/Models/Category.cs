@@ -11,7 +11,7 @@ namespace Entities.Models
         public int Id { get; set; }
 
         [StringLength(255, ErrorMessage = "NameEn can't be longer than 255 characters")]
-        public string NameEn { get; set; }
+        public string Name_En { get; set; }
 
 
     }
