@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PinyinCardApi.Controllers
+namespace PinyinCardApi.Extensions
 {
     public static class ServiceExtensions
     {
