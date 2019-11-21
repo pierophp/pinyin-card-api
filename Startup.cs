@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+// Implementar logs https://code-maze.com/net-core-web-development-part3/
+
 namespace PinyinCardApi
 {
     public class Startup
@@ -21,6 +23,9 @@ namespace PinyinCardApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
+            // configure IIS ???? https://code-maze.com/net-core-web-development-part2
+            services.ConfigureMySqlContext(Configuration);
+            services.ConfigureRepositoryWrapper();
             services.AddControllers();
         }
 
