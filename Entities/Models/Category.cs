@@ -7,7 +7,7 @@ namespace Entities.Models
     public class Category
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column(Order = 0)]
+        [Key, Column("id", Order = 0)]
         public int Id { get; set; }
 
         [StringLength(255, ErrorMessage = "NameEn can't be longer than 255 characters")]

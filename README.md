@@ -1,3 +1,11 @@
+## Commands
+
+dotnet tool install --global dotnet-ef --version 3.0.0
+
+dotnet-ef migrations add MigrationName
+
+dotnet-ef database update
+
 ## References
 
 https://code-maze.com/csharp-back-to-basics/
