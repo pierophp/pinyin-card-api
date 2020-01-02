@@ -1,5 +1,5 @@
-﻿using Contracts;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Repository;
 using System;
 using System.Threading.Tasks;
 
@@ -9,9 +9,9 @@ namespace PinyinCardApi.Controllers
     [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
-        private IRepositoryWrapper _repoWrapper;
+        private RepositoryWrapper _repoWrapper;
 
-        public CategoryController(IRepositoryWrapper repoWrapper)
+        public CategoryController(RepositoryWrapper repoWrapper)
         {
             _repoWrapper = repoWrapper;
         }

@@ -17,3 +17,5 @@ https://code-maze.com/entity-framework-core-series/
 https://code-maze.com/async-generic-repository-pattern/
 
 https://code-maze.com/getting-started-with-efcore
+
+https://www.thereformedprogrammer.net/is-the-repository-pattern-useful-with-entity-framework-core/

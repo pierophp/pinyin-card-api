@@ -1,4 +1,3 @@
-using Contracts;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +27,7 @@ namespace PinyinCardApi.Extensions
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
-            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<RepositoryWrapper, RepositoryWrapper>();
         }
     }
 

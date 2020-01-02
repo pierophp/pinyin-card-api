@@ -1,13 +1,12 @@
-using Contracts;
 using Entities;
 
 namespace Repository
 {
-    public class RepositoryWrapper : IRepositoryWrapper
+    public class RepositoryWrapper
     {
         private RepositoryContext _repoContext;
-        private ICategoryRepository _category;
-        public ICategoryRepository Category
+        private CategoryRepository _category;
+        public CategoryRepository Category
         {
             get
             {

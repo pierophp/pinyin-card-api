@@ -1,4 +1,3 @@
-using Contracts;
 using Entities;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
+    public class CategoryRepository : RepositoryBase<Category>
     {
         public CategoryRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
