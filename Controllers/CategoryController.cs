@@ -1,6 +1,7 @@
 ﻿using Contracts;
-using System;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace PinyinCardApi.Controllers
 {
@@ -15,17 +16,31 @@ namespace PinyinCardApi.Controllers
             _repoWrapper = repoWrapper;
         }
 
-        public IActionResult GetAllOwners()
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var categories = _repoWrapper.Category.FindAll();
+                var categories = await _repoWrapper.Category.GetAllAsync();
                 return Ok(categories);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Something went wrong inside GetAllOwners action: {ex.Message}");
+                return StatusCode(500, $"Something went wrong inside GetAll action: {ex.Message}");
             }
         }
+
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Category>> GetCategory(long id)
+        // {
+        //     var todoItem = await _repoWrapper.Category.FindAsync(id);
+
+        //     if (todoItem == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return todoItem;
+        // }
     }
 }
