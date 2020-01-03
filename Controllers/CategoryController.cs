@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using AutoMapper;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using System;
@@ -12,9 +13,13 @@ namespace PinyinCardApi.Controllers
     {
         private RepositoryWrapper _repoWrapper;
 
-        public CategoryController(RepositoryWrapper repoWrapper)
+        private IMapper _mapper;
+
+
+        public CategoryController(RepositoryWrapper repoWrapper, IMapper mapper)
         {
             _repoWrapper = repoWrapper;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -60,17 +65,16 @@ namespace PinyinCardApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Category category)
         {
-            var dbCategory = await _repoWrapper.Category.GetByIdAsync(id);
+            var categoryEntity = await _repoWrapper.Category.GetByIdAsync(id);
 
-            dbCategory.NamePt = category.NamePt;
-            dbCategory.NameEn = category.NameEn;
-            dbCategory.NameChs = category.NameChs;
-            dbCategory.NameCht = category.NameCht;
+            categoryEntity = _mapper.Map(category, categoryEntity);
+            categoryEntity.Id = id;
 
-            _repoWrapper.Category.Update(dbCategory);
+            _repoWrapper.Category.Update(categoryEntity);
+
             await _repoWrapper.SaveAsync();
 
-            return NoContent();
+            return Ok(categoryEntity);
         }
 
         [HttpDelete("{id}")]

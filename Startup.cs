@@ -1,3 +1,4 @@
+using AutoMapper;
 using PinyinCardApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,7 @@ namespace PinyinCardApi
             services.ConfigureMySqlContext(Configuration);
             services.ConfigureRepositoryWrapper();
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
