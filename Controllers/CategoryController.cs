@@ -88,17 +88,17 @@ namespace PinyinCardApi.Controllers
             return NoContent();
         }
 
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<Category>> GetCategory(long id)
-        // {
-        //     var todoItem = await _repoWrapper.Category.FindAsync(id);
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Category>> Get(int id)
+        {
+            var category = await _repoWrapper.Category.GetByIdAsync(id);
 
-        //     if (todoItem == null)
-        //     {
-        //         return NotFound();
-        //     }
+            if (category == null)
+            {
+                return NotFound();
+            }
 
-        //     return todoItem;
-        // }
+            return category;
+        }
     }
 }
