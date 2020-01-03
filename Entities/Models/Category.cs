@@ -24,7 +24,7 @@ namespace Entities.Models
 
         [StringLength(255, ErrorMessage = "NameChs can't be longer than 255 characters")]
         [Column("name_chs")]
-        public string NameChS { get; set; }
+        public string NameChs { get; set; }
 
     }
 }

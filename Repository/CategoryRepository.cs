@@ -20,5 +20,11 @@ namespace Repository
                 .OrderBy(e => e.NameEn)
                 .ToListAsync();
         }
+
+        public async Task<Category> GetByIdAsync(int id)
+        {
+            return await FindByCondition(e => e.Id.Equals(id))
+                .FirstOrDefaultAsync();
+        }
     }
 }
