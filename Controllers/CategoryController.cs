@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Entities.Models;
+﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using System;
@@ -13,13 +12,10 @@ namespace PinyinCardApi.Controllers
     {
         private RepositoryWrapper _repoWrapper;
 
-        private IMapper _mapper;
 
-
-        public CategoryController(RepositoryWrapper repoWrapper, IMapper mapper)
+        public CategoryController(RepositoryWrapper repoWrapper)
         {
             _repoWrapper = repoWrapper;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -67,8 +63,17 @@ namespace PinyinCardApi.Controllers
         {
             var categoryEntity = await _repoWrapper.Category.GetByIdAsync(id);
 
-            categoryEntity = _mapper.Map(category, categoryEntity);
-            categoryEntity.Id = id;
+            var properties = category.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.Name == "Id" || property.Name == "CreatedAt" || property.Name == "UpdatedAt")
+                {
+                    continue;
+                }
+
+                var value = category.GetType().GetProperty(property.Name).GetValue(category);
+                categoryEntity.GetType().GetProperty(property.Name).SetValue(categoryEntity, value, null);
+            }
 
             _repoWrapper.Category.Update(categoryEntity);
 
