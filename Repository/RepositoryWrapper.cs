@@ -1,4 +1,7 @@
 using Entities;
+using Entities.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -27,12 +30,38 @@ namespace Repository
 
         public void Save()
         {
+            AddTimestamps();
             _repoContext.SaveChanges();
         }
 
         public async Task SaveAsync()
         {
+            AddTimestamps();
             await _repoContext.SaveChangesAsync();
+        }
+
+        private void AddTimestamps()
+        {
+            foreach (var entry in _repoContext.ChangeTracker.Entries())
+            {
+                if (entry.Entity is BaseEntity == false)
+                {
+                    continue;
+                }
+
+                if (entry.State != EntityState.Added && entry.State != EntityState.Modified)
+                {
+                    continue;
+                }
+
+
+                if (entry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entry.Entity).CreatedAt = DateTime.Now;
+                }
+
+                ((BaseEntity)entry.Entity).UpdatedAt = DateTime.Now;
+            }
         }
     }
 }
