@@ -22,6 +22,19 @@ namespace Repository
             }
         }
 
+        private CardRepository _card;
+        public CardRepository Card
+        {
+            get
+            {
+                if (_card == null)
+                {
+                    _card = new CardRepository(_repoContext);
+                }
+                return _card;
+            }
+        }
+
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {

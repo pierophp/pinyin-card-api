@@ -11,5 +11,7 @@ namespace Entities
         }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Card> Cards { get; set; }
     }
 }
