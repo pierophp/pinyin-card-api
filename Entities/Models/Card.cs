@@ -35,8 +35,16 @@ namespace Entities.Models
         public string Image { get; set; }
 
         [StringLength(255, ErrorMessage = "Audio can't be longer than 255 characters")]
-        [Column("audio")]
-        public string Audio { get; set; }
+        [Column("audio_ch")]
+        public string AudioCh { get; set; }
+
+        [StringLength(255, ErrorMessage = "Audio can't be longer than 255 characters")]
+        [Column("audio_en")]
+        public string AudioEn { get; set; }
+
+        [StringLength(255, ErrorMessage = "Audio can't be longer than 255 characters")]
+        [Column("audio_pt")]
+        public string AudioPt { get; set; }
 
         [Column("category_id")]
         public int CategoryId { get; set; }

@@ -32,3 +32,4 @@ msbuild.wrn
 .vs/
 .history/
 dist.zip
+appsettings.Production.json
