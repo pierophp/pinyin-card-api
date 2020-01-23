@@ -6,6 +6,18 @@ dotnet-ef migrations add MigrationName
 
 dotnet-ef database update
 
+dotnet build
+
+dotnet add package Microsoft.AspNetCore.Hosting.Abstractions --version 2.2.0
+
+# Produ;áo
+
+dotnet publish
+
+zip -r dist.zip bin/Debug/netcoreapp3.0/publish
+
+scp dist.zip pinyin:~
+
 ## References
 
 https://code-maze.com/csharp-back-to-basics/
