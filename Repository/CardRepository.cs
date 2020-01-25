@@ -21,6 +21,13 @@ namespace Repository
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Card>> GetByCategoryIdAsync(int categoryId)
+        {
+            return await FindByCondition(e => e.CategoryId.Equals(categoryId))
+                .OrderBy(e => e.NameEn)
+                .ToListAsync();
+        }
+
         public async Task<Card> GetByIdAsync(int id)
         {
             return await FindByCondition(e => e.Id.Equals(id))

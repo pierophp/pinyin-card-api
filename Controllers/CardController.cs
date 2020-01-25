@@ -32,6 +32,20 @@ namespace PinyinCardApi.Controllers
             }
         }
 
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetByCategory(int categoryId)
+        {
+            try
+            {
+                var cards = await _repoWrapper.Card.GetByCategoryIdAsync(categoryId);
+                return Ok(cards);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Something went wrong inside GetByCategory action: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]Card card)
         {
