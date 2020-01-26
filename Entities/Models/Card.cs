@@ -14,9 +14,17 @@ namespace Entities.Models
         [Column("name_en")]
         public string NameEn { get; set; }
 
+        [StringLength(255, ErrorMessage = "AudioEn can't be longer than 255 characters")]
+        [Column("audio_en")]
+        public string AudioEn { get; set; }
+
         [StringLength(255, ErrorMessage = "NamePt can't be longer than 255 characters")]
         [Column("name_pt")]
         public string NamePt { get; set; }
+
+        [StringLength(255, ErrorMessage = "AudioPt can't be longer than 255 characters")]
+        [Column("audio_pt")]
+        public string AudioPt { get; set; }
 
         [StringLength(255, ErrorMessage = "NameCht can't be longer than 255 characters")]
         [Column("name_cht")]
@@ -30,21 +38,29 @@ namespace Entities.Models
         [Column("pinyin")]
         public string Pinyin { get; set; }
 
-        [StringLength(255, ErrorMessage = "Image can't be longer than 255 characters")]
-        [Column("image")]
-        public string Image { get; set; }
-
-        [StringLength(255, ErrorMessage = "Audio can't be longer than 255 characters")]
+        [StringLength(255, ErrorMessage = "AudioCh can't be longer than 255 characters")]
         [Column("audio_ch")]
         public string AudioCh { get; set; }
 
-        [StringLength(255, ErrorMessage = "Audio can't be longer than 255 characters")]
-        [Column("audio_en")]
-        public string AudioEn { get; set; }
+        [StringLength(255, ErrorMessage = "NameIt can't be longer than 255 characters")]
+        [Column("name_it")]
+        public string NameIt { get; set; }
 
-        [StringLength(255, ErrorMessage = "Audio can't be longer than 255 characters")]
-        [Column("audio_pt")]
-        public string AudioPt { get; set; }
+        [StringLength(255, ErrorMessage = "AudioIt can't be longer than 255 characters")]
+        [Column("audio_it")]
+        public string AudioIt { get; set; }
+
+        [StringLength(255, ErrorMessage = "NameFr can't be longer than 255 characters")]
+        [Column("name_fr")]
+        public string NameFr { get; set; }
+
+        [StringLength(255, ErrorMessage = "AudioFr can't be longer than 255 characters")]
+        [Column("audio_fr")]
+        public string AudioFr { get; set; }
+
+        [StringLength(255, ErrorMessage = "Image can't be longer than 255 characters")]
+        [Column("image")]
+        public string Image { get; set; }
 
         [Column("category_id")]
         public int CategoryId { get; set; }

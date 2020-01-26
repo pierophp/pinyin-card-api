@@ -26,5 +26,13 @@ namespace Entities.Models
         [Column("name_chs")]
         public string NameChs { get; set; }
 
+        [StringLength(255, ErrorMessage = "NameIt can't be longer than 255 characters")]
+        [Column("name_it")]
+        public string NameIt { get; set; }
+
+        [StringLength(255, ErrorMessage = "NameFr can't be longer than 255 characters")]
+        [Column("name_fr")]
+        public string NameFr { get; set; }
+
     }
 }
