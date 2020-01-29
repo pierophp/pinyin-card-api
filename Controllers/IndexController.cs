@@ -30,7 +30,6 @@ namespace PinyinCardApi.Controllers
                     timezone = TimeZoneInfo.Local.DisplayName,
                     os = System.Runtime.InteropServices.RuntimeInformation.OSDescription,
                     dotnet_version = dotnetVersion,
-
                 });
             }
             catch (Exception ex)

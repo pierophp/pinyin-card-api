@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+
 
 namespace PinyinCardApi.Controllers
 {
@@ -11,7 +13,6 @@ namespace PinyinCardApi.Controllers
     public class CardController : ControllerBase
     {
         private RepositoryWrapper _repoWrapper;
-
 
         public CardController(RepositoryWrapper repoWrapper)
         {
@@ -61,7 +62,14 @@ namespace PinyinCardApi.Controllers
                     return BadRequest("Invalid model object");
                 }
 
+                var image = card.Image;
+                card.Image = "";
+
                 _repoWrapper.Card.Create(card);
+                await _repoWrapper.SaveAsync();
+
+                card.Image = image;
+                _repoWrapper.Card.Update(await _repoWrapper.Card.SaveImage(card));
                 await _repoWrapper.SaveAsync();
 
                 return Created("Created", card);
@@ -80,7 +88,14 @@ namespace PinyinCardApi.Controllers
             var properties = card.GetType().GetProperties();
             foreach (var property in properties)
             {
-                if (property.Name == "Id" || property.Name == "CreatedAt" || property.Name == "UpdatedAt")
+                List<string> fields = new List<string>(){
+                    "Id",
+                    "CreatedAt",
+                    "UpdatedAt",
+                    "Image",
+                };
+
+                if (fields.Contains(property.Name))
                 {
                     continue;
                 }
@@ -90,10 +105,13 @@ namespace PinyinCardApi.Controllers
             }
 
             _repoWrapper.Card.Update(cardEntity);
+            cardEntity.Image = card.Image;
 
+            _repoWrapper.Card.Update(await _repoWrapper.Card.SaveImage(cardEntity));
             await _repoWrapper.SaveAsync();
 
             return Ok(cardEntity);
+
         }
 
         [HttpDelete("{id}")]
