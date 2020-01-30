@@ -89,7 +89,7 @@ namespace PinyinCardApi.Controllers.Cards
 
             var cloudinaryResponse = await cloudinary.UploadAsync(uploadParams);
 
-            var newImageUrl = cloudinaryResponse.Uri.ToString();
+            var newImageUrl = cloudinaryResponse.SecureUri.ToString();
 
             if (newImageUrl != "")
             {
