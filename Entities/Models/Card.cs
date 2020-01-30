@@ -58,7 +58,6 @@ namespace Entities.Models
         [Column("audio_fr")]
         public string AudioFr { get; set; }
 
-        [StringLength(255, ErrorMessage = "Image can't be longer than 255 characters")]
         [Column("image")]
         public string Image { get; set; }
 

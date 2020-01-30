@@ -2,6 +2,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using ImageMagick;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -30,8 +31,26 @@ namespace PinyinCardApi.Controllers.Cards
                 return imageUrl;
             }
 
-            WebClient wc = new WebClient();
-            byte[] bytes = wc.DownloadData(imageUrl);
+            byte[] bytes;
+
+            if (imageUrl.StartsWith("http"))
+            {
+                WebClient wc = new WebClient();
+                bytes = wc.DownloadData(imageUrl);
+            }
+            else
+            {
+                var imageUrlSplit = imageUrl.Split("base64,");
+                if (imageUrlSplit.Length > 1)
+                {
+                    bytes = Convert.FromBase64String(imageUrlSplit[1]);
+                }
+                else
+                {
+                    throw new Exception("Invalid image");
+                }
+            }
+
             MemoryStream memoryStream = new MemoryStream(bytes);
 
             MagickImage image = new MagickImage(memoryStream);
