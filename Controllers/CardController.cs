@@ -1,10 +1,11 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using PinyinCardApi.Controllers.Cards;
 using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 
 namespace PinyinCardApi.Controllers
 {
@@ -14,9 +15,12 @@ namespace PinyinCardApi.Controllers
     {
         private RepositoryWrapper _repoWrapper;
 
-        public CardController(RepositoryWrapper repoWrapper)
+        private IConfiguration _config;
+
+        public CardController(RepositoryWrapper repoWrapper, IConfiguration config)
         {
             _repoWrapper = repoWrapper;
+            _config = config;
         }
 
         [HttpGet]
@@ -68,8 +72,9 @@ namespace PinyinCardApi.Controllers
                 _repoWrapper.Card.Create(card);
                 await _repoWrapper.SaveAsync();
 
-                card.Image = image;
-                _repoWrapper.Card.Update(await _repoWrapper.Card.SaveImage(card));
+                var cloudinaryManager = new CloudinaryManager(_config);
+                card.Image = await cloudinaryManager.SaveImage(image, card.Id);
+                _repoWrapper.Card.Update(card);
                 await _repoWrapper.SaveAsync();
 
                 return Created("Created", card);
@@ -104,10 +109,10 @@ namespace PinyinCardApi.Controllers
                 cardEntity.GetType().GetProperty(property.Name).SetValue(cardEntity, value, null);
             }
 
-            _repoWrapper.Card.Update(cardEntity);
-            cardEntity.Image = card.Image;
+            var cloudinaryManager = new CloudinaryManager(_config);
+            cardEntity.Image = await cloudinaryManager.SaveImage(card.Image, cardEntity.Id);
 
-            _repoWrapper.Card.Update(await _repoWrapper.Card.SaveImage(cardEntity));
+            _repoWrapper.Card.Update(cardEntity);
             await _repoWrapper.SaveAsync();
 
             return Ok(cardEntity);

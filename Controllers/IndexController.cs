@@ -10,7 +10,6 @@ namespace PinyinCardApi.Controllers
     public class IndexController : ControllerBase
     {
 
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -21,7 +20,6 @@ namespace PinyinCardApi.Controllers
                     .GetEntryAssembly()?
                     .GetCustomAttribute<TargetFrameworkAttribute>()?
                     .FrameworkName;
-
 
                 return Ok(new
                 {
