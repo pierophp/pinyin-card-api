@@ -19,7 +19,7 @@ namespace PinyinCardApi.Controllers.Cards
             _config = config;
         }
 
-        public async Task<string> SaveImage(string imageUrl, int cardId)
+        public async Task<string> SaveCardImage(string imageUrl, int cardId)
         {
             if (imageUrl.Contains("cloudinary.com"))
             {
@@ -63,15 +63,21 @@ namespace PinyinCardApi.Controllers.Cards
 
             Cloudinary cloudinary = new Cloudinary(account);
 
-            var tranformation = new Transformation().Quality("auto:eco");
+            var tranformation = new Transformation().Quality("auto:good");
 
             if (image.Width > image.Height)
             {
-                tranformation.Width(1024);
+                if (image.Width > 1024)
+                {
+                    tranformation.Width(1024);
+                }
             }
             else
             {
-                tranformation.Height(768);
+                if (image.Height > 768)
+                {
+                    tranformation.Height(768);
+                }
             }
 
             var folder = _config["cloudinary:folder"];

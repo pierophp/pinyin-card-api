@@ -73,7 +73,7 @@ namespace PinyinCardApi.Controllers
                 await _repoWrapper.SaveAsync();
 
                 var cloudinaryManager = new CloudinaryManager(_config);
-                card.Image = await cloudinaryManager.SaveImage(image, card.Id);
+                card.Image = await cloudinaryManager.SaveCardImage(image, card.Id);
                 _repoWrapper.Card.Update(card);
                 await _repoWrapper.SaveAsync();
 
@@ -110,7 +110,7 @@ namespace PinyinCardApi.Controllers
             }
 
             var cloudinaryManager = new CloudinaryManager(_config);
-            cardEntity.Image = await cloudinaryManager.SaveImage(card.Image, cardEntity.Id);
+            cardEntity.Image = await cloudinaryManager.SaveCardImage(card.Image, cardEntity.Id);
 
             _repoWrapper.Card.Update(cardEntity);
             await _repoWrapper.SaveAsync();
