@@ -54,6 +54,9 @@ namespace PinyinCardApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]Card card)
         {
+
+            var repositoryContext = _repoWrapper.GetRepositoryContext();
+
             try
             {
                 if (card == null)
@@ -66,6 +69,9 @@ namespace PinyinCardApi.Controllers
                     return BadRequest("Invalid model object");
                 }
 
+
+                await repositoryContext.Database.BeginTransactionAsync();
+
                 var image = card.Image;
                 card.Image = "";
 
@@ -77,45 +83,66 @@ namespace PinyinCardApi.Controllers
                 _repoWrapper.Card.Update(card);
                 await _repoWrapper.SaveAsync();
 
+                repositoryContext.Database.CommitTransaction();
+
                 return Created("Created", card);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500, "Internal server error");
+                repositoryContext.Database.RollbackTransaction();
+
+                return StatusCode(500, "Internal server error: " + e.Message);
             }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Card card)
         {
-            var cardEntity = await _repoWrapper.Card.GetByIdAsync(id);
 
-            var properties = card.GetType().GetProperties();
-            foreach (var property in properties)
+            var repositoryContext = _repoWrapper.GetRepositoryContext();
+
+            try
             {
-                List<string> fields = new List<string>(){
+
+                var cardEntity = await _repoWrapper.Card.GetByIdAsync(id);
+
+                var properties = card.GetType().GetProperties();
+                foreach (var property in properties)
+                {
+                    List<string> fields = new List<string>(){
                     "Id",
                     "CreatedAt",
                     "UpdatedAt",
                     "Image",
                 };
 
-                if (fields.Contains(property.Name))
-                {
-                    continue;
+                    if (fields.Contains(property.Name))
+                    {
+                        continue;
+                    }
+
+                    var value = card.GetType().GetProperty(property.Name).GetValue(card);
+                    cardEntity.GetType().GetProperty(property.Name).SetValue(cardEntity, value, null);
                 }
 
-                var value = card.GetType().GetProperty(property.Name).GetValue(card);
-                cardEntity.GetType().GetProperty(property.Name).SetValue(cardEntity, value, null);
+                await repositoryContext.Database.BeginTransactionAsync();
+
+                var cloudinaryManager = new CloudinaryManager(_config);
+                cardEntity.Image = await cloudinaryManager.SaveCardImage(card.Image, cardEntity.Id);
+
+                _repoWrapper.Card.Update(cardEntity);
+                await _repoWrapper.SaveAsync();
+
+                repositoryContext.Database.CommitTransaction();
+
+                return Ok(cardEntity);
             }
+            catch (Exception e)
+            {
+                repositoryContext.Database.RollbackTransaction();
 
-            var cloudinaryManager = new CloudinaryManager(_config);
-            cardEntity.Image = await cloudinaryManager.SaveCardImage(card.Image, cardEntity.Id);
-
-            _repoWrapper.Card.Update(cardEntity);
-            await _repoWrapper.SaveAsync();
-
-            return Ok(cardEntity);
+                return StatusCode(500, "Internal server error:" + e.Message);
+            }
 
         }
 

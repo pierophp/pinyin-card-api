@@ -8,15 +8,21 @@ namespace Repository
 {
     public class RepositoryWrapper
     {
-        private RepositoryContext _repoContext;
+        private RepositoryContext _repositoryContext;
         private CategoryRepository _category;
+
+        public RepositoryWrapper(RepositoryContext repositoryContext)
+        {
+            _repositoryContext = repositoryContext;
+        }
+
         public CategoryRepository Category
         {
             get
             {
                 if (_category == null)
                 {
-                    _category = new CategoryRepository(_repoContext);
+                    _category = new CategoryRepository(_repositoryContext);
                 }
                 return _category;
             }
@@ -29,33 +35,32 @@ namespace Repository
             {
                 if (_card == null)
                 {
-                    _card = new CardRepository(_repoContext);
+                    _card = new CardRepository(_repositoryContext);
                 }
                 return _card;
             }
         }
 
-
-        public RepositoryWrapper(RepositoryContext repositoryContext)
+        public RepositoryContext GetRepositoryContext()
         {
-            _repoContext = repositoryContext;
+            return _repositoryContext;
         }
 
         public void Save()
         {
             AddTimestamps();
-            _repoContext.SaveChanges();
+            _repositoryContext.SaveChanges();
         }
 
         public async Task SaveAsync()
         {
             AddTimestamps();
-            await _repoContext.SaveChangesAsync();
+            await _repositoryContext.SaveChangesAsync();
         }
 
         private void AddTimestamps()
         {
-            foreach (var entry in _repoContext.ChangeTracker.Entries())
+            foreach (var entry in _repositoryContext.ChangeTracker.Entries())
             {
                 if (entry.Entity is BaseEntity == false)
                 {
