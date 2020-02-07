@@ -34,5 +34,12 @@ namespace Entities.Models
         [Column("name_fr")]
         public string NameFr { get; set; }
 
+        [Column("parent_category_id")]
+        public int? ParentCategoryId { get; set; }
+
+
+        [Column("parent_category_id")]
+        public Category? ParentCategory { get; set; }
+
     }
 }

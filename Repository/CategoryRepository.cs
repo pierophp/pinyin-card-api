@@ -21,6 +21,14 @@ namespace Repository
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Category>> GetAllByParentCategoryAsync(int? categoryId)
+        {
+            return await FindByCondition(e => e.ParentCategoryId.Equals(categoryId))
+
+                .OrderBy(e => e.NameEn)
+                .ToListAsync();
+        }
+
         public async Task<Category> GetByIdAsync(int id)
         {
             return await FindByCondition(e => e.Id.Equals(id))
