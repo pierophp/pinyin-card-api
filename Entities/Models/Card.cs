@@ -1,8 +1,36 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Innofactor.EfCoreJsonValueConverter;
+
+
 
 namespace Entities.Models
 {
+    public class ExtraEn
+    {
+
+    }
+
+    public class ExtraPt
+    {
+        public string Gender { get; set; }
+    }
+
+    public class ExtraIt
+    {
+        public string Gender { get; set; }
+    }
+
+    public class ExtraFr
+    {
+        public string Gender { get; set; }
+    }
+
+    public class ExtraCh
+    {
+        public string MeasureWordT { get; set; }
+        public string MeasureWordS { get; set; }
+    }
     [Table("card")]
     public class Card : BaseEntity
     {
@@ -18,6 +46,10 @@ namespace Entities.Models
         [Column("audio_en")]
         public string AudioEn { get; set; }
 
+        [Column("extra_en", TypeName = "Json")]
+        [JsonField]
+        public ExtraEn ExtraEn { get; set; }
+
         [StringLength(255, ErrorMessage = "NamePt can't be longer than 255 characters")]
         [Column("name_pt")]
         public string NamePt { get; set; }
@@ -25,6 +57,10 @@ namespace Entities.Models
         [StringLength(255, ErrorMessage = "AudioPt can't be longer than 255 characters")]
         [Column("audio_pt")]
         public string AudioPt { get; set; }
+
+        [Column("extra_pt", TypeName = "Json")]
+        [JsonField]
+        public ExtraPt ExtraPt { get; set; }
 
         [StringLength(255, ErrorMessage = "NameCht can't be longer than 255 characters")]
         [Column("name_cht")]
@@ -42,6 +78,10 @@ namespace Entities.Models
         [Column("audio_ch")]
         public string AudioCh { get; set; }
 
+        [Column("extra_ch", TypeName = "Json")]
+        [JsonField]
+        public ExtraCh ExtraCh { get; set; }
+
         [StringLength(255, ErrorMessage = "NameIt can't be longer than 255 characters")]
         [Column("name_it")]
         public string NameIt { get; set; }
@@ -50,6 +90,10 @@ namespace Entities.Models
         [Column("audio_it")]
         public string AudioIt { get; set; }
 
+        [Column("extra_it", TypeName = "Json")]
+        [JsonField]
+        public ExtraIt ExtraIt { get; set; }
+
         [StringLength(255, ErrorMessage = "NameFr can't be longer than 255 characters")]
         [Column("name_fr")]
         public string NameFr { get; set; }
@@ -57,6 +101,10 @@ namespace Entities.Models
         [StringLength(255, ErrorMessage = "AudioFr can't be longer than 255 characters")]
         [Column("audio_fr")]
         public string AudioFr { get; set; }
+
+        [Column("extra_fr", TypeName = "Json")]
+        [JsonField]
+        public ExtraFr ExtraFr { get; set; }
 
         [Column("image")]
         public string Image { get; set; }

@@ -1,4 +1,5 @@
 using Entities.Models;
+using Innofactor.EfCoreJsonValueConverter;
 using Microsoft.EntityFrameworkCore;
 
 namespace Entities
@@ -13,5 +14,11 @@ namespace Entities
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Card> Cards { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Card>();
+            builder.AddJsonFields();
+        }
     }
 }
