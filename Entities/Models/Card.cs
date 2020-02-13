@@ -8,22 +8,33 @@ namespace Entities.Models
 {
     public class ExtraEn
     {
-
+        public string Pronunciation { get; set; }
     }
 
     public class ExtraPt
     {
         public string Gender { get; set; }
+        public string FemaleName { get; set; }
+
+        public string FemaleAudio { get; set; }
     }
 
     public class ExtraIt
     {
         public string Gender { get; set; }
+
+        public string FemaleName { get; set; }
+
+        public string FemaleAudio { get; set; }
     }
 
     public class ExtraFr
     {
         public string Gender { get; set; }
+
+        public string FemaleName { get; set; }
+
+        public string FemaleAudio { get; set; }
     }
 
     public class ExtraCh
