@@ -11,7 +11,6 @@ namespace PinyinCardApi.Controllers
     public class ForvoController : ControllerBase
     {
 
-
         [HttpGet]
         public IActionResult Index()
         {
