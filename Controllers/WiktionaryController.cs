@@ -19,7 +19,7 @@ namespace PinyinCardApi.Controllers
                 var web = new HtmlWeb();
                 var doc = web.Load(url);
                 var elements = doc.DocumentNode.SelectNodes("//span[@class='IPA']");
-                var IPA = elements[0].InnerText.Replace("/", string.Empty).Replace("ˈ", string.Empty);
+                var IPA = elements[0].InnerText.Replace("/", string.Empty);
 
 
                 return Ok(new
