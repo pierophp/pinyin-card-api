@@ -15,7 +15,7 @@ namespace PinyinCardApi.Controllers
 
             try
             {
-                var url = $"https://{language}.wiktionary.org/wiki/{word}";
+                var url = $"https://{language}.wiktionary.org/wiki/{word.ToLower()}";
                 var web = new HtmlWeb();
                 var doc = web.Load(url);
                 var elements = doc.DocumentNode.SelectNodes("//span[@class='IPA']");
