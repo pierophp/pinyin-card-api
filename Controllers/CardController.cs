@@ -1,7 +1,7 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using PinyinCardApi.Controllers.Cards;
+using PinyinCardApi.Core.Cards;
 using Repository;
 using System;
 using System.Collections.Generic;

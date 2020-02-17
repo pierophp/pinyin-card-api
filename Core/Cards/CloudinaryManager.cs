@@ -7,7 +7,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace PinyinCardApi.Controllers.Cards
+namespace PinyinCardApi.Core.Cards
 {
 
     public class CloudinaryManager

@@ -1,6 +1,6 @@
-﻿using HtmlAgilityPack;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using PinyinCardApi.Core.Wiktionary;
 
 
 namespace PinyinCardApi.Controllers
@@ -15,12 +15,9 @@ namespace PinyinCardApi.Controllers
 
             try
             {
-                var url = $"https://{language}.wiktionary.org/wiki/{word.ToLower()}";
-                var web = new HtmlWeb();
-                var doc = web.Load(url);
-                var elements = doc.DocumentNode.SelectNodes("//span[@class='IPA']");
-                var IPA = elements[0].InnerText.Replace("/", string.Empty);
 
+                var ipaFinder = new IpaFinder();
+                var IPA = ipaFinder.Find(language, word);
 
                 return Ok(new
                 {
