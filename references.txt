@@ -1,0 +1,10 @@
+https://code-maze.com/searching-aspnet-core-webapi/
+https://code-maze.com/filtering-aspnet-core-webapi/
+https://code-maze.com/filtering-aspnet-core-webapi/
+https://code-maze.com/async-generic-repository-pattern/
+https://code-maze.com/net-core-web-development-part4/
+https://code-maze.com/net-core-web-development-part5/
+https://code-maze.com/net-core-web-development-part6/
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples/3.0/TodoApi
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.1&tabs=visual-studio-code
+https://code-maze.com/efcore-relationships/
