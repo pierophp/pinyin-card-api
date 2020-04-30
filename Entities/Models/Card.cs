@@ -37,6 +37,15 @@ namespace Entities.Models
         public string FemaleAudio { get; set; }
     }
 
+    public class ExtraDe
+    {
+        public string Gender { get; set; }
+
+        public string FemaleName { get; set; }
+
+        public string FemaleAudio { get; set; }
+    }
+
     public class ExtraCh
     {
         public string MeasureWordT { get; set; }
@@ -116,6 +125,18 @@ namespace Entities.Models
         [Column("extra_fr", TypeName = "Json")]
         [JsonField]
         public ExtraFr ExtraFr { get; set; }
+
+        [StringLength(255, ErrorMessage = "NameEn can't be longer than 255 characters")]
+        [Column("name_de")]
+        public string NameDe { get; set; }
+
+        [StringLength(255, ErrorMessage = "AudioEn can't be longer than 255 characters")]
+        [Column("audio_de")]
+        public string AudioDe { get; set; }
+
+        [Column("extra_de", TypeName = "Json")]
+        [JsonField]
+        public ExtraDe ExtraDe { get; set; }
 
         [Column("image")]
         public string Image { get; set; }

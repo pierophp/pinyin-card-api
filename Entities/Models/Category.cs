@@ -34,6 +34,10 @@ namespace Entities.Models
         [Column("name_fr")]
         public string NameFr { get; set; }
 
+        [StringLength(255, ErrorMessage = "NameFr can't be longer than 255 characters")]
+        [Column("name_de")]
+        public string NameDe { get; set; }
+
         [Column("parent_category_id")]
         public int? ParentCategoryId { get; set; }
 
