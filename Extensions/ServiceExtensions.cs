@@ -21,8 +21,9 @@ namespace PinyinCardApi.Extensions
 
         public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration config)
         {
+            var serverVersion = new MySqlServerVersion(new System.Version(8, 0, 11));
             var connectionString = config["mysqlconnection:connectionString"];
-            services.AddDbContextPool<RepositoryContext>(o => o.UseMySql(connectionString));
+            services.AddDbContextPool<RepositoryContext>(optionsBuilder => optionsBuilder.UseMySql(connectionString, serverVersion));
         }
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)

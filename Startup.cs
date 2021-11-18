@@ -13,12 +13,20 @@ namespace PinyinCardApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfigurationRoot Configuration { get; }
+
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+           .SetBasePath(env.ContentRootPath)
+           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true) //load base settings
+           .AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true) //load local settings
+           .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true) //load environment settings
+           .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
