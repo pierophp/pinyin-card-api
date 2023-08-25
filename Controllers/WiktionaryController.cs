@@ -15,7 +15,6 @@ namespace PinyinCardApi.Controllers
 
             try
             {
-
                 var ipaFinder = new IpaFinder();
                 var IPA = ipaFinder.Find(language, word);
 

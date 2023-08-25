@@ -10,12 +10,12 @@ dotnet build
 
 dotnet add package Microsoft.AspNetCore.Hosting.Abstractions --version 2.2.0
 
-# Produ;áo
+# Produção
 
 dotnet publish
-rm bin/Debug/netcoreapp6.0/publish/appsettings.json
-cp appsettings.Production.json bin/Debug/netcoreapp6.0/publish/appsettings.json
-zip -r dist.zip bin/Debug/netcoreapp6.0/publish
+rm bin/Debug/net6.0/publish/appsettings.json
+cp appsettings.Production.json bin/Debug/net6.0/publish/appsettings.json
+zip -r dist.zip bin/Debug/net6.0/publish
 scp dist.zip pinyin:~
 
 ```
@@ -23,7 +23,7 @@ ssh pinyin
 rm -Rf bin
 unzip dist.zip
 rm -Rf /var/www/pinyin-card-api/*
-cp -R bin/Debug/netcoreapp6.0/publish/* /var/www/pinyin-card-api/
+cp -R bin/Debug/net6.0/publish/* /var/www/pinyin-card-api/
 sudo supervisorctl restart pinyin-card-api
 ```
 
@@ -40,3 +40,4 @@ https://code-maze.com/async-generic-repository-pattern/
 https://code-maze.com/getting-started-with-efcore
 
 https://www.thereformedprogrammer.net/is-the-repository-pattern-useful-with-entity-framework-core/
+
