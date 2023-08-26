@@ -1,5 +1,18 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Innofactor.EfCoreJsonValueConverter;
+
+public class Props
+{
+    public string NameEn { get; set; }
+    public string NameIt { get; set; }
+    public string NameFr { get; set; }
+    public string NameDe { get; set; }
+    public string NamePt { get; set; }
+    public string NameChs { get; set; }
+    public string NameCht { get; set; }
+    public string Image { get; set; }
+}
 
 namespace Entities.Models
 {
@@ -44,6 +57,10 @@ namespace Entities.Models
 
         [Column("parent_category_id")]
         public Category? ParentCategory { get; set; }
+
+        [Column("props", TypeName = "Json")]
+        [JsonField]
+        public Props Props { get; set; }
 
     }
 }

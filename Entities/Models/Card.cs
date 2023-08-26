@@ -51,6 +51,18 @@ namespace Entities.Models
         public string MeasureWordT { get; set; }
         public string MeasureWordS { get; set; }
     }
+
+    public class Props
+    {
+        public string NameEn { get; set; }
+        public string NameIt { get; set; }
+        public string NameFr { get; set; }
+        public string NameDe { get; set; }
+        public string NamePt { get; set; }
+        public string NameChs { get; set; }
+        public string NameCht { get; set; }
+        public string Image { get; set; }
+    }
     [Table("card")]
     public class Card : BaseEntity
     {
@@ -144,9 +156,12 @@ namespace Entities.Models
         [Column("category_id")]
         public int CategoryId { get; set; }
 
-
         [Column("category_id")]
         public Category Category { get; set; }
+
+        [Column("props", TypeName = "Json")]
+        [JsonField]
+        public Props Props { get; set; }
 
     }
 }

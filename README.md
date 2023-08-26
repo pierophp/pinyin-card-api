@@ -1,10 +1,12 @@
 ## Commands
 
-dotnet tool install --global dotnet-ef --version 6.0.0
+dotnet new tool-manifest
 
-dotnet-ef migrations add MigrationName
+dotnet tool install --local dotnet-ef --version 6.0.0
 
-dotnet-ef database update
+dotnet dotnet-ef migrations add MigrationName
+
+dotnet dotnet-ef database update
 
 dotnet build
 
