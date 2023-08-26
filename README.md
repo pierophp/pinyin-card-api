@@ -2,7 +2,7 @@
 
 dotnet new tool-manifest
 
-dotnet tool install --local dotnet-ef --version 6.0.0
+dotnet tool install --local dotnet-ef --version 7.0.0
 
 dotnet dotnet-ef migrations add MigrationName
 
@@ -15,9 +15,9 @@ dotnet add package Microsoft.AspNetCore.Hosting.Abstractions --version 2.2.0
 # Produção
 
 dotnet publish
-rm bin/Debug/net6.0/publish/appsettings.json
-cp appsettings.Production.json bin/Debug/net6.0/publish/appsettings.json
-zip -r dist.zip bin/Debug/net6.0/publish
+rm bin/Debug/net/publish/appsettings.json
+cp appsettings.Production.json bin/Debug/net/publish/appsettings.json
+zip -r dist.zip bin/Debug/net/publish
 scp dist.zip pinyin:~
 
 ```
@@ -25,7 +25,7 @@ ssh pinyin
 rm -Rf bin
 unzip dist.zip
 rm -Rf /var/www/pinyin-card-api/*
-cp -R bin/Debug/net6.0/publish/* /var/www/pinyin-card-api/
+cp -R bin/Debug/net/publish/* /var/www/pinyin-card-api/
 sudo supervisorctl restart pinyin-card-api
 ```
 
