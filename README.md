@@ -43,3 +43,6 @@ https://code-maze.com/getting-started-with-efcore
 
 https://www.thereformedprogrammer.net/is-the-repository-pattern-useful-with-entity-framework-core/
 
+
+JSON field nativo
+https://devblogs.microsoft.com/dotnet/announcing-ef7-release-candidate-2/
