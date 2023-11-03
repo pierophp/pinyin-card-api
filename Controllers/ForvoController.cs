@@ -1,34 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace PinyinCardApi.Controllers;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PinyinCardApi.Controllers
+[ApiController]
+[Route("[controller]")]
+public class ForvoController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ForvoController : ControllerBase
+    [HttpGet]
+    public IActionResult Index()
     {
-
-        [HttpGet]
-        public IActionResult Index()
+        // async Task<
+        try
         {
-            // async Task<
-            try
-            {
-                // var client = new HttpClient();
-                // var response = await client.GetAsync("https://forvo.com/word/duck/#en_usa");
+            // var client = new HttpClient();
+            // var response = await client.GetAsync("https://forvo.com/word/duck/#en_usa");
 
-                return Ok(new
-                {
-                    welcome = "Welcome to Pinyin Card"
-                });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Something went wrong inside GetAll action: {ex.Message}");
-            }
+            return Ok(new { welcome = "Welcome to Luca's Cards" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Something went wrong inside GetAll action: {ex.Message}");
         }
     }
 }

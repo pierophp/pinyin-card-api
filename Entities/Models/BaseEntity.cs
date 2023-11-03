@@ -1,16 +1,13 @@
+namespace PinyinCardApi.Entities.Models;
+
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.Models
+public class BaseEntity
 {
-    public class BaseEntity
-    {
+    [Column("created_at")]
+    public DateTime? CreatedAt { get; set; }
 
-        [Column("created_at")]
-        public DateTime? CreatedAt { get; set; }
-
-        [Column("updated_at")]
-        public DateTime? UpdatedAt { get; set; }
-
-    }
+    [Column("updated_at")]
+    public DateTime? UpdatedAt { get; set; }
 }

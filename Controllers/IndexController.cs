@@ -1,39 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace PinyinCardApi.Controllers;
+
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Reflection;
 using System.Runtime.Versioning;
 
-namespace PinyinCardApi.Controllers
+[ApiController]
+[Route("/")]
+public class IndexController : ControllerBase
 {
-    [ApiController]
-    [Route("/")]
-    public class IndexController : ControllerBase
+    [HttpGet]
+    public IActionResult Index()
     {
-
-        [HttpGet]
-        public IActionResult Index()
+        try
         {
-            try
-            {
+            var dotnetVersion = Assembly
+                .GetEntryAssembly()
+                ?.GetCustomAttribute<TargetFrameworkAttribute>()
+                ?.FrameworkName;
 
-                var dotnetVersion = Assembly
-                    .GetEntryAssembly()?
-                    .GetCustomAttribute<TargetFrameworkAttribute>()?
-                    .FrameworkName;
-
-                return Ok(new
+            return Ok(
+                new
                 {
-                    welcome = "Welcome to Pinyin Card",
+                    welcome = "Welcome to Luca's Cards",
                     date_time = DateTime.Now,
                     timezone = TimeZoneInfo.Local.DisplayName,
                     os = System.Runtime.InteropServices.RuntimeInformation.OSDescription,
                     dotnet_version = dotnetVersion,
-                });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Something went wrong inside GetAll action: {ex.Message}");
-            }
+                }
+            );
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Something went wrong inside GetAll action: {ex.Message}");
         }
     }
 }

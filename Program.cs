@@ -1,21 +1,25 @@
+namespace PinyinCardApi;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Entities;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace PinyinCardApi
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().MigrateDatabase().Run();
-        }
+        JsonSerializerOptions options =
+            new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        CreateHostBuilder(args).Build().MigrateDatabase().Run();
     }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 }
