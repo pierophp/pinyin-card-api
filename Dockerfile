@@ -1,18 +1,22 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:7.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
 
-FROM mcr.microsoft.com/dotnet/core/sdk:7.0-buster AS build
+ENV ASPNETCORE_URLS=http://+:5000
+
+USER app
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG configuration=Release
 WORKDIR /src
-COPY ["PinyinCardApi.csproj", ""]
-RUN dotnet restore "./PinyinCardApi.csproj"
+COPY ["PinyinCardApi.csproj", "./"]
+RUN dotnet restore "PinyinCardApi.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "PinyinCardApi.csproj" -c Release -o /app/build
+RUN dotnet build "PinyinCardApi.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "PinyinCardApi.csproj" -c Release -o /app/publish
+ARG configuration=Release
+RUN dotnet publish "PinyinCardApi.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

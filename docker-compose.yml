@@ -1,5 +1,12 @@
-version: "3.2"
+version: "3.4"
 services:
+  pinyincardapi:
+    image: pinyincardapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
   mysql:
     container_name: pinyin_card_mysql
     image: mysql:8.0
