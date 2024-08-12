@@ -302,5 +302,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-appsettings.Production.json
 data/*
