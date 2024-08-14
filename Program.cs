@@ -10,8 +10,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        JsonSerializerOptions options =
-            new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+        // JsonSerializerOptions options =
+        //     new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
         CreateHostBuilder(args).Build().MigrateDatabase().Run();
     }

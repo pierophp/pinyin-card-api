@@ -3,6 +3,7 @@ namespace PinyinCardApi.Entities.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+[ComplexType]
 public class CategoryProps
 {
     public string? NameEn { get; set; }

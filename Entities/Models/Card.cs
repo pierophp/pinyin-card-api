@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Innofactor.EfCoreJsonValueConverter;
 
+[ComplexType]
 public class ExtraEn
 {
     public string? Pronunciation { get; set; }
 }
 
+[ComplexType]
 public class ExtraPt
 {
     public string? Gender { get; set; }
@@ -17,6 +19,7 @@ public class ExtraPt
     public string? FemaleAudio { get; set; }
 }
 
+[ComplexType]
 public class ExtraIt
 {
     public string? Gender { get; set; }
@@ -26,6 +29,7 @@ public class ExtraIt
     public string? FemaleAudio { get; set; }
 }
 
+[ComplexType]
 public class ExtraFr
 {
     public string? Gender { get; set; }
@@ -35,6 +39,7 @@ public class ExtraFr
     public string? FemaleAudio { get; set; }
 }
 
+[ComplexType]
 public class ExtraDe
 {
     public string? Gender { get; set; }
@@ -44,6 +49,7 @@ public class ExtraDe
     public string? FemaleAudio { get; set; }
 }
 
+[ComplexType]
 public class ExtraRu
 {
     public string? Gender { get; set; }
@@ -53,12 +59,14 @@ public class ExtraRu
     public string? FemaleAudio { get; set; }
 }
 
+[ComplexType]
 public class ExtraCh
 {
     public string? MeasureWordT { get; set; }
     public string? MeasureWordS { get; set; }
 }
 
+[ComplexType]
 public class CardProps
 {
     public string? NameEn { get; set; }
